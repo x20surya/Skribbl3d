@@ -31,11 +31,15 @@ function Room() {
 
       <input
         placeholder="Message.."
+        value={message}
         onChange={(e) => {
           setMessage(e.target.value);
         }}
       />
-      <button onClick={sendMessage}>send </button>
+      <button onClick={()=>{
+        sendMessage();
+        setMessage("");
+      }}>send </button>
       <h1>{messageReceived}</h1>
     </>
   );
