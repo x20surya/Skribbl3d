@@ -13,3 +13,5 @@
 
 `npm run dev` to start client server
 
+Make sure to run server and client in different terminals
+
