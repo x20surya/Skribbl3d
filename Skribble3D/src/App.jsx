@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from "react-router-dom";
 import Room from "./pages/Room";
 import Home from "./pages/Home";
+import RoomHome from "./pages/RoomHome";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/room" element={<Room />} />
+        <Route path="/room" element={<RoomHome />} />
         <Route path="/room/:id" element={<Room />} />
       </Routes>
     </>
