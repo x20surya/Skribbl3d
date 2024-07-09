@@ -18,7 +18,6 @@ const io = new Server(server, {
 
 //Middleware(socket will only make a connection when you next() inside this io.use
 io.use((socket, next) => {
-
 });
 
 io.on("connection", (socket) => {
