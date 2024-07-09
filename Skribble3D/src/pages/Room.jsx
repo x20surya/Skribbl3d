@@ -1,11 +1,11 @@
 import io from "socket.io-client";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-const socket = io.connect("http://localhost:3000");
-
 function Room() {
+  const socket = useMemo(() => io.connect("http://localhost:3000"), []);
+
   const { id } = useParams();
   //Room State
   const [room, setRoom] = useState(id);
@@ -21,9 +21,17 @@ function Room() {
   };
 
   useEffect(() => {
+    socket.on("connect", () => {
+      console.log("connected", socket.id);
+    });
+
     socket.on("receive_message", (data) => {
       setMessageReveived(data.message);
     });
+
+    return () => {
+      socket.disconnect();
+    };
   }, [socket]);
   return (
     <>
@@ -36,10 +44,14 @@ function Room() {
           setMessage(e.target.value);
         }}
       />
-      <button onClick={()=>{
-        sendMessage();
-        setMessage("");
-      }}>send </button>
+      <button
+        onClick={() => {
+          sendMessage();
+          setMessage("");
+        }}
+      >
+        send{" "}
+      </button>
       <h1>{messageReceived}</h1>
     </>
   );
